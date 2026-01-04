@@ -12,19 +12,6 @@ linters:
     - unused
     - ineffassign
 
-formatters:
-  enable:
-    - gofmt
-
-linters-settings:
-  govet:
-    enable-all: true
-
-formatters-settings:
-  gofmt:
-    simplify: true
-
 issues:
-  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
