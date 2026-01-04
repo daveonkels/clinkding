@@ -119,4 +119,4 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
 
 announce:
-  skip: "{{ .Env.SKIP_ANNOUNCE }}"
+  skip: true
