@@ -1,0 +1,123 @@
+# GoReleaser configuration for clinkding
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: clinkding
+    binary: clinkding
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+
+archives:
+  - id: clinkding
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- .Arch }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - '^ci:'
+  groups:
+    - title: Features
+      regexp: '^feat:'
+      order: 0
+    - title: Bug Fixes
+      regexp: '^fix:'
+      order: 1
+    - title: Others
+      order: 999
+
+brews:
+  - name: clinkding
+    repository:
+      owner: daveonkels
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    folder: Formula
+    homepage: https://github.com/daveonkels/clinkding
+    description: Modern CLI for linkding bookmark manager
+    license: MIT
+    install: |
+      bin.install "clinkding"
+
+      # Generate shell completions
+      generate_completions_from_executable(bin/"clinkding", "completion")
+    test: |
+      system "#{bin}/clinkding --version"
+
+release:
+  github:
+    owner: daveonkels
+    name: clinkding
+  draft: false
+  prerelease: auto
+  mode: replace
+  header: |
+    ## clinkding {{ .Tag }}
+
+    Modern CLI for linkding bookmark manager.
+
+    ### Installation
+
+    #### macOS (Homebrew)
+    ```bash
+    brew install daveonkels/tap/clinkding
+    ```
+
+    #### Binary Download
+    Download the appropriate binary for your platform below.
+
+  footer: |
+    **Full Changelog**: https://github.com/daveonkels/clinkding/compare/{{ .PreviousTag }}...{{ .Tag }}
+
+dockers:
+  - image_templates:
+      - "ghcr.io/daveonkels/clinkding:{{ .Tag }}"
+      - "ghcr.io/daveonkels/clinkding:v{{ .Major }}"
+      - "ghcr.io/daveonkels/clinkding:v{{ .Major }}.{{ .Minor }}"
+      - "ghcr.io/daveonkels/clinkding:latest"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+
+announce:
+  skip: "{{ .Env.SKIP_ANNOUNCE }}"
