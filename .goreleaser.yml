@@ -68,7 +68,6 @@ brews:
       owner: daveonkels
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    folder: Formula
     homepage: https://github.com/daveonkels/clinkding
     description: Modern CLI for linkding bookmark manager
     license: MIT
