@@ -3,10 +3,10 @@ package models
 import "time"
 
 type Tag struct {
-	ID           int       `json:"id"`
-	Name         string    `json:"name"`
-	DateAdded    time.Time `json:"date_added"`
-	BookmarkCount int      `json:"bookmark_count"`
+	ID            int       `json:"id"`
+	Name          string    `json:"name"`
+	DateAdded     time.Time `json:"date_added"`
+	BookmarkCount int       `json:"bookmark_count"`
 }
 
 type TagList struct {

@@ -6,8 +6,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/fatih/color"
 	"github.com/daveonkels/clinkding/internal/config"
+	"github.com/fatih/color"
 )
 
 type Formatter struct {
@@ -26,14 +26,14 @@ func (f *Formatter) Print(format string, args ...interface{}) {
 	if f.cfg.Quiet {
 		return
 	}
-	fmt.Fprintf(f.writer, format, args...)
+	_, _ = fmt.Fprintf(f.writer, format, args...)
 }
 
 func (f *Formatter) Println(format string, args ...interface{}) {
 	if f.cfg.Quiet {
 		return
 	}
-	fmt.Fprintf(f.writer, format+"\n", args...)
+	_, _ = fmt.Fprintf(f.writer, format+"\n", args...)
 }
 
 func (f *Formatter) PrintJSON(data interface{}) error {
@@ -48,9 +48,9 @@ func (f *Formatter) Success(format string, args ...interface{}) {
 	}
 	if f.shouldUseColor() {
 		green := color.New(color.FgGreen).SprintFunc()
-		fmt.Fprintf(f.writer, green("✓")+" "+format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, green("✓")+" "+format+"\n", args...)
 	} else {
-		fmt.Fprintf(f.writer, format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, format+"\n", args...)
 	}
 }
 
@@ -58,9 +58,9 @@ func (f *Formatter) Error(format string, args ...interface{}) {
 	writer := os.Stderr
 	if f.shouldUseColor() {
 		red := color.New(color.FgRed).SprintFunc()
-		fmt.Fprintf(writer, red("Error:")+" "+format+"\n", args...)
+		_, _ = fmt.Fprintf(writer, red("Error:")+" "+format+"\n", args...)
 	} else {
-		fmt.Fprintf(writer, "Error: "+format+"\n", args...)
+		_, _ = fmt.Fprintf(writer, "Error: "+format+"\n", args...)
 	}
 }
 
@@ -70,9 +70,9 @@ func (f *Formatter) Warning(format string, args ...interface{}) {
 	}
 	if f.shouldUseColor() {
 		yellow := color.New(color.FgYellow).SprintFunc()
-		fmt.Fprintf(f.writer, yellow("Warning:")+" "+format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, yellow("Warning:")+" "+format+"\n", args...)
 	} else {
-		fmt.Fprintf(f.writer, "Warning: "+format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, "Warning: "+format+"\n", args...)
 	}
 }
 
@@ -82,9 +82,9 @@ func (f *Formatter) Info(format string, args ...interface{}) {
 	}
 	if f.shouldUseColor() {
 		blue := color.New(color.FgBlue).SprintFunc()
-		fmt.Fprintf(f.writer, blue("ℹ")+" "+format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, blue("ℹ")+" "+format+"\n", args...)
 	} else {
-		fmt.Fprintf(f.writer, format+"\n", args...)
+		_, _ = fmt.Fprintf(f.writer, format+"\n", args...)
 	}
 }
 

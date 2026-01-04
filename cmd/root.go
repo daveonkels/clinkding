@@ -17,10 +17,10 @@ var (
 	quiet       bool
 	verbose     bool
 
-	cfg         *config.Config
-	version     string
-	commit      string
-	date        string
+	cfg     *config.Config
+	version string
+	commit  string
+	date    string
 )
 
 var rootCmd = &cobra.Command{

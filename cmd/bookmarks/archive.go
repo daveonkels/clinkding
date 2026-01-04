@@ -13,21 +13,21 @@ import (
 )
 
 var archiveCmd = &cobra.Command{
-	Use:   "archive <id>",
-	Short: "Archive a bookmark",
-	Long:  "Mark a bookmark as archived.",
+	Use:     "archive <id>",
+	Short:   "Archive a bookmark",
+	Long:    "Mark a bookmark as archived.",
 	Example: `  clinkding bookmarks archive 42`,
-	Args: cobra.ExactArgs(1),
-	RunE: runArchive,
+	Args:    cobra.ExactArgs(1),
+	RunE:    runArchive,
 }
 
 var unarchiveCmd = &cobra.Command{
-	Use:   "unarchive <id>",
-	Short: "Unarchive a bookmark",
-	Long:  "Mark an archived bookmark as active.",
+	Use:     "unarchive <id>",
+	Short:   "Unarchive a bookmark",
+	Long:    "Mark an archived bookmark as active.",
 	Example: `  clinkding bookmarks unarchive 42`,
-	Args: cobra.ExactArgs(1),
-	RunE: runUnarchive,
+	Args:    cobra.ExactArgs(1),
+	RunE:    runUnarchive,
 }
 
 func runArchive(cobraCmd *cobra.Command, args []string) error {

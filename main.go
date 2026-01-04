@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	assetsCmd "github.com/daveonkels/clinkding/cmd/assets"
 	"github.com/daveonkels/clinkding/cmd"
+	assetsCmd "github.com/daveonkels/clinkding/cmd/assets"
 	bookmarksCmd "github.com/daveonkels/clinkding/cmd/bookmarks"
 	bundlesCmd "github.com/daveonkels/clinkding/cmd/bundles"
 	configCmd "github.com/daveonkels/clinkding/cmd/config"

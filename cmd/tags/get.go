@@ -14,12 +14,12 @@ import (
 )
 
 var getCmd = &cobra.Command{
-	Use:   "get <id>",
-	Short: "Get a tag by ID",
-	Long:  "Retrieve detailed information about a specific tag.",
+	Use:     "get <id>",
+	Short:   "Get a tag by ID",
+	Long:    "Retrieve detailed information about a specific tag.",
 	Example: `  clinkding tags get 42`,
-	Args: cobra.ExactArgs(1),
-	RunE: runGet,
+	Args:    cobra.ExactArgs(1),
+	RunE:    runGet,
 }
 
 func runGet(cobraCmd *cobra.Command, args []string) error {

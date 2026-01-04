@@ -3,19 +3,19 @@ package models
 import "time"
 
 type Bookmark struct {
-	ID              int       `json:"id"`
-	URL             string    `json:"url"`
-	Title           string    `json:"title"`
-	Description     string    `json:"description"`
-	Notes           string    `json:"notes"`
-	WebsiteTitle    string    `json:"website_title"`
-	WebsiteDescription string `json:"website_description"`
-	IsArchived      bool      `json:"is_archived"`
-	Unread          bool      `json:"unread"`
-	Shared          bool      `json:"shared"`
-	TagNames        []string  `json:"tag_names"`
-	DateAdded       time.Time `json:"date_added"`
-	DateModified    time.Time `json:"date_modified"`
+	ID                 int       `json:"id"`
+	URL                string    `json:"url"`
+	Title              string    `json:"title"`
+	Description        string    `json:"description"`
+	Notes              string    `json:"notes"`
+	WebsiteTitle       string    `json:"website_title"`
+	WebsiteDescription string    `json:"website_description"`
+	IsArchived         bool      `json:"is_archived"`
+	Unread             bool      `json:"unread"`
+	Shared             bool      `json:"shared"`
+	TagNames           []string  `json:"tag_names"`
+	DateAdded          time.Time `json:"date_added"`
+	DateModified       time.Time `json:"date_modified"`
 }
 
 type BookmarkList struct {
@@ -47,9 +47,9 @@ type BookmarkUpdate struct {
 }
 
 type BookmarkCheck struct {
-	Bookmark *Bookmark         `json:"bookmark"`
-	Metadata BookmarkMetadata  `json:"metadata"`
-	AutoTags []string          `json:"auto_tags"`
+	Bookmark *Bookmark        `json:"bookmark"`
+	Metadata BookmarkMetadata `json:"metadata"`
+	AutoTags []string         `json:"auto_tags"`
 }
 
 type BookmarkMetadata struct {
