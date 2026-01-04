@@ -1,21 +1,26 @@
+version: "2"
+
 run:
   timeout: 5m
   tests: true
 
 linters:
   enable:
-    - gofmt
     - govet
     - errcheck
     - staticcheck
     - unused
-    - gosimple
     - ineffassign
-    - typecheck
+
+formatters:
+  enable:
+    - gofmt
 
 linters-settings:
   govet:
     check-shadowing: true
+
+formatters-settings:
   gofmt:
     simplify: true
 

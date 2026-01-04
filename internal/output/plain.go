@@ -13,5 +13,5 @@ func PrintPlain(records [][]string) {
 }
 
 func PrintPlainLine(fields ...string) {
-	fmt.Fprintln(os.Stdout, strings.Join(fields, "\t"))
+	_, _ = fmt.Fprintln(os.Stdout, strings.Join(fields, "\t"))
 }

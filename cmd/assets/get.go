@@ -14,12 +14,12 @@ import (
 )
 
 var getCmd = &cobra.Command{
-	Use:   "get <bookmark-id> <asset-id>",
-	Short: "Get asset details",
-	Long:  "Retrieve detailed information about a specific asset.",
+	Use:     "get <bookmark-id> <asset-id>",
+	Short:   "Get asset details",
+	Long:    "Retrieve detailed information about a specific asset.",
 	Example: `  clinkding assets get 42 1`,
-	Args: cobra.ExactArgs(2),
-	RunE: runGet,
+	Args:    cobra.ExactArgs(2),
+	RunE:    runGet,
 }
 
 func runGet(cobraCmd *cobra.Command, args []string) error {

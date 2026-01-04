@@ -52,7 +52,7 @@ func (c *Client) do(ctx context.Context, method, path string, body io.Reader, re
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return err
@@ -108,7 +108,7 @@ func (c *Client) UploadFile(ctx context.Context, path, filePath string, result i
 	if err != nil {
 		return fmt.Errorf("failed to open file: %w", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
@@ -139,7 +139,7 @@ func (c *Client) UploadFile(ctx context.Context, path, filePath string, result i
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return err
@@ -168,7 +168,7 @@ func (c *Client) DownloadFile(ctx context.Context, path, outputPath string) erro
 	if err != nil {
 		return fmt.Errorf("request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if err := checkResponse(resp); err != nil {
 		return err
@@ -178,7 +178,7 @@ func (c *Client) DownloadFile(ctx context.Context, path, outputPath string) erro
 	if err != nil {
 		return fmt.Errorf("failed to create output file: %w", err)
 	}
-	defer out.Close()
+	defer func() { _ = out.Close() }()
 
 	if _, err := io.Copy(out, resp.Body); err != nil {
 		return fmt.Errorf("failed to write file: %w", err)
